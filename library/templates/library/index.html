@@ -1,0 +1,27 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block title %}
+Home | Librapp
+{% endblock %}
+
+{% block head %}
+<meta name="description" content='Librapp | An app to manage your library'>
+{% endblock %}
+
+{% block body %}
+
+{% include 'library/hero.html' %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-10">
+                <h1 class="title is-3 has-text-centered">Trending books</h1>
+                {% include 'library/_books_loop.html' with books=trending_books per_row=3 %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

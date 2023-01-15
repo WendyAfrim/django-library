@@ -1,0 +1,8 @@
+.wide-container {
+    flex: 1 0 auto;
+}
+
+.sidemargin {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+}

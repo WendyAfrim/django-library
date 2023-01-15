@@ -1,0 +1,103 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block title %}
+Add a book - Book | Librapp
+{% endblock %}
+
+{% block head %}
+<meta name="description" content='Librapp | An app to manage your library'>
+{% endblock %}
+
+{% block body %}
+
+{% include 'library/hero.html' %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8 is-offset-2">
+                <h1 class="title">
+                    Add a book
+                </h1>
+                <h2 class="subtitle">
+                    Add a new book to the library
+                </h2>
+                <form action="{% url 'book_add' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label class="label">Title</label>
+                        <div class="control">
+                            <input class="input" type="text" name="title" value="{{ book.title }}" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Author</label>
+                        <div class="control">
+                            <input class="input" type="text" name="author" value="{{ book.author }}" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Editor</label>
+                        <div class="control">
+                            <input class="input" type="text" name="editor" value="{{ book.editor }}" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Cover</label>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input class="input" type="file" name="cover" value="{{ book.cover }}">
+                            </div>
+                            <div class="control" style="display: none;">
+                                <button class="button is-danger" type="button" onclick="removeImage()">
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                        <p class="help">If you don't upload a cover, it will be found automatically</p>
+                    </div>
+                    <div class="field">
+                        <label class="label">Collection</label>
+                        <div class="control">
+                            <input class="input" type="text" name="collection" value="{{ book.collection }}" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Gender</label>
+                        <div class="control">
+                            <input class="input" type="text" name="gender" value="{{ book.gender }}" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Libraries</label>
+                        <div class="control">
+                            <div class="select is-multiple">
+                                <select multiple name="libraries">
+                                    {% for library in libraries %}
+                                    <option value="{{ library.id }}" {% if library in book.libraries.all %}selected{% endif %}>{{ library.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" name="was_borrowed" {% if book.was_borrowed %}checked{% endif %}>
+                                Was Borrowed
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link" type="submit">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

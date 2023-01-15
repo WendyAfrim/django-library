@@ -1,0 +1,36 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block title %}
+Searched for "{{ query }}" - Books | Librapp
+{% endblock %}
+
+{% block head %}
+<meta name="description" content='Librapp | An app to manage your library'>
+{% endblock %}
+
+{% block body %}
+
+{% include 'library/hero.html' %}
+
+<section class="section">
+    <div class="container mb-6">
+        <div class="container">
+            <div class="field">
+                {% if perms.library.add_book %}
+                <div class="buttons is-pulled-right">
+                    <a class="button is-primary" href="{% url 'index' %}">Add new book</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="field">
+                <h1 class="title">Searched for "{{ query }}"</h1>
+                <h2 class="subtitle">Found {{ books.count }} books</h2>
+            </div>
+        </div>
+    </div>
+
+    {% include 'library/_books_loop.html' with books=books per_row=4 %}
+</section>
+
+{% endblock %}

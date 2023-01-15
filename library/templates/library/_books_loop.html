@@ -1,0 +1,83 @@
+{% load library_extras %}
+{% load static %}
+
+{% if books.count == 0 %}
+<div class="column is-full">
+    <div class="notification is-warning">
+        <button class="delete"></button>
+        <strong>Oops!</strong> No books found.
+    </div>
+</div>
+{% endif %}
+<div class="columns is-multiline is-centered">
+    {% for book in books %}
+    {% with per_row=per_row %}
+    {% if per_row == 1 %}
+    <div class="column is-full">
+    {% elif per_row == 2 %}
+    <div class="column is-half">
+    {% elif per_row == 3 %}
+    <div class="column is-one-third">
+    {% elif per_row == 4 %}
+    <div class="column is-one-quarter">
+    {% elif per_row == 5 %}
+    <div class="column is-one-fifth">
+    {% elif per_row == 6 %}
+    <div class="column is-one-sixth">
+    {% else %}
+    <div class="column is-3">
+    {% endif %}
+    {% endwith %}
+        <div class="card">
+            <div class="card-image has-text-centered">
+                <figure class="image is-4by3">
+                    {% if book.cover %}
+                    <img src="{{ book.cover }}" alt="{{ book.title }}">
+                    {% else %}
+                    <img src="{% static 'img/placeholder.png' %}" alt="{{ book.title }}">
+                    {% endif %}
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4 has-text-weight-bold">{{ book.title }}</p>
+                        <p class="subtitle is-6">{{ book.author }}</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p><strong>Editor:</strong> {{ book.editor }}</p>
+                    <p><strong>Collection:</strong> {{ book.collection }}</p>
+                    <p><strong>Gender:</strong> {{ book.gender }}</p>
+                    <p>
+                        <strong>Libraries:</strong>
+                        {% for library in book.libraries.all %}
+                        {% if forloop.last %}
+                        {{ library.name }}
+                        {% else %}
+                        {{ library.name }},
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p><strong>Borrowed:</strong> {% if book.was_borrowed %} <span class="tag is-danger">Yes</span>
+                        {% else %} <span class="tag is-success">No</span>
+                        {% endif %}</p>
+                </div>
+            </div>
+            <footer class="card-footer">
+                {% if single == 1 %}
+                <a href="{% url 'books' %}" class="card-footer-item">🔙 Back</a>
+                {% else %}
+                <a href="{% url 'book' book.id %}" class="card-footer-item">View</a>
+                {% endif %}
+                {% if perms.library.change_book %}
+                <a href="{% url 'book_update' book.id %}" class="card-footer-item">Update</a>
+                {% endif %}
+                {% if perms.library.delete_book %}
+                <a href="{% url 'book_delete' book.id %}" class="card-footer-item has-text-danger">Delete</a>
+                {% endif %}
+            </footer>
+        </div>
+    </div>
+    {% endfor %}
+</div>
