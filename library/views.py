@@ -22,7 +22,7 @@ def search(request):
     }
     return render(request, "library/search.html", context)
 
-@user_passes_test(User.is_bookseller)
+@user_passes_test(lambda u: u.is_superuser or User.is_bookseller)
 def update_book(request, book_id):
     book = Book.objects.get(id=book_id)
     libraries = Library.objects.all()
@@ -46,7 +46,7 @@ def update_book(request, book_id):
         return redirect("book", book_id=book.id)
     return render(request, "library/book_update.html", {"book": book, "libraries": libraries})
 
-@user_passes_test(User.is_bookseller)
+@user_passes_test(lambda u: u.is_superuser or User.is_bookseller)
 def add_book(request):
     libraries = Library.objects.all()
     if request.method == "POST":
@@ -71,7 +71,7 @@ def add_book(request):
         return redirect("book", book_id=book.id)
     return render(request, "library/book_add.html", {"libraries": libraries})
 
-@user_passes_test(User.is_bookseller)
+@user_passes_test(lambda u: u.is_superuser or User.is_bookseller)
 def delete_book(request, book_id):
     book = Book.objects.get(id=book_id)
     book.delete()
