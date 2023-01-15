@@ -1,0 +1,32 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block title %}
+Home | Librapp
+{% endblock %}
+
+{% block head %}
+<meta name="description" content='Librapp | An app to manage your library'>
+{% endblock %}
+
+{% block body %}
+
+{% include 'library/navbar.html' %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8 is-offset-2">
+                <h1 class="title">
+                    Error 403
+                </h1>
+                <h2 class="subtitle">
+                    You are not authorized to view this page.
+                </h2>
+                <a class="button is-info is-medium" href="{% url 'index' %}">Go Home</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

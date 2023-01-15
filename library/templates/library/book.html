@@ -1,0 +1,23 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block title %}
+
+{{ book.0.title }} - Book | Librapp
+{% endblock %}
+
+{% block head %}
+<meta name="description" content='Librapp | An app to manage your library'>
+{% endblock %}
+
+{% block body %}
+
+{% include 'library/hero.html' %}
+
+<section class="section">
+    <div class="container">
+        {% include 'library/_books_loop.html' with books=book per_row=3 single=1 %}
+    </div>
+</section>
+
+{% endblock %}

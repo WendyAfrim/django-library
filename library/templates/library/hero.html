@@ -1,0 +1,35 @@
+<section class="hero is-dark is-small">
+    <div class="hero-head">
+        {% include 'library/navbar.html' %}
+    </div>
+
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-5">
+                    <p class="title">
+                        Library
+                    </p>
+                    <p class="subtitle medium-top-margin">
+                        A simple library database
+                    </p>
+                    <a class="button is-link is-medium is-hidden-touch" href="{% url 'books' %}">Explore the
+                        Database</a>
+                </div>
+                <div class="column is-offset-2 mt-3">
+                    <div class="field has-addons">
+                        <form action="{% url 'search' %}" method="GET" class="is-flex is-flex-grow-1">
+                            <div class="control is-expanded">
+                                <input class="input is-medium" type="text" placeholder="Search for a book" name="q">
+                            </div>
+                            <div class="control">
+                                <a class="button is-link is-medium" href="{% url 'search' %}">
+                                    Search</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
