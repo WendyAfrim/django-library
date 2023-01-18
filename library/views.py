@@ -11,13 +11,16 @@ def index(request):
     return render(request, "library/index.html", {"trending_books": trending_books})
 
 def search(request):
-    query = request.GET.get("q") if request.GET.get("q") else ""
+    query = request.GET.get("title") if request.GET.get("title") else ""
+    library_id = int(request.GET.get("library")) if request.GET.get("library") else ""
+    books = Book.objects.filter(was_borrowed=False)
     if query:
-        books = Book.objects.filter(title__icontains=query)
-    else:
-        books = Book.objects.none()
+        books = books.filter(title__icontains=query)
+    if library_id:
+        books = books.filter(libraries__id=library_id)
     context = {
         "query": query,
+        "library_id": library_id,
         "books": books,
     }
     return render(request, "library/search.html", context)

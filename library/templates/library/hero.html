@@ -16,15 +16,26 @@
                     <a class="button is-link is-medium is-hidden-touch" href="{% url 'books' %}">Explore the
                         Database</a>
                 </div>
-                <div class="column is-offset-2 mt-3">
+                <div class="column is-offset-1 mt-3">
                     <div class="field has-addons">
                         <form action="{% url 'search' %}" method="GET" class="is-flex is-flex-grow-1">
                             <div class="control is-expanded">
-                                <input class="input is-medium" type="text" placeholder="Search for a book" name="q">
+                                <input class="input" type="text" placeholder="Search for a book" name="title" value="{% if query %}{{ query }}{% endif %}">
                             </div>
                             <div class="control">
-                                <a class="button is-link is-medium" href="{% url 'search' %}">
-                                    Search</a>
+                                <div class="select">
+                                    <select name="library">
+                                        <option value="">Select library</option>
+                                        {% for library in all_libraries %}
+                                        <option value="{{ library.id }}" {% if library.id == library_id %}selected{% endif %}>{{ library.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link" type="submit">
+                                    Search
+                                </button>
                             </div>
                         </form>
                     </div>
