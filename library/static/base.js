@@ -47,3 +47,22 @@ $('div.field:has(input[name="cover"])').on('change', 'input[type="file"]', funct
     };
     reader.readAsDataURL(file);
 });
+
+$(document).ready(function () {
+    $('#overdue_only_input').on('change', function () {
+        var checked = this.checked;
+        $.get({
+            url: '/dashboard',
+            data: {
+                overdue_only: checked
+            },
+            success: function (data) {
+                $('#borrowed-book-table').html($(data).find('#borrowed-book-table').html());
+            }
+        });
+    });
+});
+
+$('tr[data-href]').on("click", function() {
+    document.location = $(this).data('href');
+});

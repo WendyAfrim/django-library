@@ -1,0 +1,77 @@
+{% extends 'library/base.html' %}
+{% load static %}
+{% load render_table from django_tables2 %}
+
+{% block title %}
+Libraries | Librapp
+{% endblock %}
+
+{% block head %}
+<meta name="description" content='Librapp | An app to manage your library'>
+{% endblock %}
+
+{% block body %}
+
+{% include 'library/hero.html' %}
+
+<section class="section">
+    <div class="container mb-5">
+        <div class="columns is-centered is-flex-direction-column">
+            <div class="field">
+                <h1 class="title">Libraries</h1>
+                <h2 class="subtitle">List of all libraries</h2>
+            </div>
+            <div id="map" style="width: 100%; height: 500px;"></div>
+            <script>
+                var map;
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        mapTypeId: 'terrain'
+                    });
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        map.setCenter(initialLocation);
+                        map.setZoom(13);
+                    }, function (positionError) {
+                        map.setCenter(new google.maps.LatLng(46.227638, 2.213749));
+                        map.setZoom(5);
+                    });
+                    const infoWindow = new google.maps.InfoWindow();
+                    const geocoder = new google.maps.Geocoder();
+                    {% for library in libraries %}
+                    geocoder.geocode({ 'address': "{{ library.address }}" }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            const marker = new google.maps.Marker({
+                                map: map,
+                                position: results[0].geometry.location,
+                                icon: {
+                                    url: "{% static 'img/books.png' %}",
+                                    scaledSize: new google.maps.Size(30, 30)
+                                },
+                                label: {
+                                    text: "{{ library.name }}",
+                                    color: "white",
+                                    fontSize: "10px",
+                                    fontWeight: "bold",
+                                    className: "tag is-info mb-6"
+                                },
+                                title: "{{ library.name }}"
+                            });
+                            marker.addListener("click", () => {
+                                infoWindow.close()
+                                infoWindow.setContent("<div class='has-text-centered'><h1 class='title'>{{ library.name }}</h1><p>{{ library.department }}</p><p>{{ library.address }}</p></div>");
+                                infoWindow.open(map, marker);
+                            });
+                        }
+                    });
+                    {% endfor %}
+                }
+            </script>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4IS-uXr-_raXtZ6IHcaa-ccFZyVAvyYE&callback=initMap">
+                </script>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

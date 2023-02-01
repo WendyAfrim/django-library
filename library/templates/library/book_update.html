@@ -93,14 +93,19 @@ Update {{ book.title }} - Book | Librapp
                             </div>
                         </div>
                     </div>
-                    <div class="field">
+                    <!-- <div class="field">
+                        <label class="label">Borrowing</label>
                         <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" name="was_borrowed" {% if book.was_borrowed %}checked{% endif %}>
-                                Was Borrowed
-                            </label>
+                            <div class="select">
+                                <select name="borrowing">
+                                    <option value="0">Not borrowed</option>
+                                    {% for user in users %}
+                                        <option value="{{ user.id }}" {% if user.id == book.borrowing.user.id %}selected{% endif %}>{{ user.username }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="field is-grouped">
                         <div class="control">
                             <button class="button is-link" type="submit">Update</button>

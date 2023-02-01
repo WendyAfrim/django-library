@@ -13,6 +13,11 @@
   </div>
   <div id="navbarBuger" class="navbar-menu">
     <div class="navbar-start">
+      {% if user.is_superuser or user.is_bookseller %}
+      <a class="navbar-item" href="{% url 'dashboard' %}">
+        Dashboard
+      </a>
+      {% endif %}
       <a class="navbar-item" href="{% url 'books' %}" disabled>
         Books
       </a>
