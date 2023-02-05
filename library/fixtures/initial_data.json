@@ -13,7 +13,6 @@
       "is_staff": true,
       "is_active": true,
       "date_joined": "2023-01-15T00:42:01.827Z",
-      "reading_groups": null,
       "groups": [],
       "user_permissions": []
     }
@@ -32,7 +31,6 @@
       "is_staff": false,
       "is_active": true,
       "date_joined": "2023-01-15T00:46:33Z",
-      "reading_groups": null,
       "groups": [
         1
       ],
@@ -53,7 +51,6 @@
       "is_staff": false,
       "is_active": true,
       "date_joined": "2023-01-15T00:49:00Z",
-      "reading_groups": null,
       "groups": [
         2
       ],
@@ -175,144 +172,144 @@
     "model": "auth.permission",
     "pk": 9,
     "fields": {
-      "name": "Can add reading groups",
+      "name": "Can add borrowing",
       "content_type": 3,
-      "codename": "add_readinggroups"
+      "codename": "add_borrowing"
     }
   },
   {
     "model": "auth.permission",
     "pk": 10,
     "fields": {
-      "name": "Can change reading groups",
+      "name": "Can change borrowing",
       "content_type": 3,
-      "codename": "change_readinggroups"
+      "codename": "change_borrowing"
     }
   },
   {
     "model": "auth.permission",
     "pk": 11,
     "fields": {
-      "name": "Can delete reading groups",
+      "name": "Can delete borrowing",
       "content_type": 3,
-      "codename": "delete_readinggroups"
+      "codename": "delete_borrowing"
     }
   },
   {
     "model": "auth.permission",
     "pk": 12,
     "fields": {
-      "name": "Can view reading groups",
+      "name": "Can view borrowing",
       "content_type": 3,
-      "codename": "view_readinggroups"
+      "codename": "view_borrowing"
     }
   },
   {
     "model": "auth.permission",
     "pk": 13,
     "fields": {
-      "name": "Can add session",
+      "name": "Can add book",
       "content_type": 4,
-      "codename": "add_session"
+      "codename": "add_book"
     }
   },
   {
     "model": "auth.permission",
     "pk": 14,
     "fields": {
-      "name": "Can change session",
+      "name": "Can change book",
       "content_type": 4,
-      "codename": "change_session"
+      "codename": "change_book"
     }
   },
   {
     "model": "auth.permission",
     "pk": 15,
     "fields": {
-      "name": "Can delete session",
+      "name": "Can delete book",
       "content_type": 4,
-      "codename": "delete_session"
+      "codename": "delete_book"
     }
   },
   {
     "model": "auth.permission",
     "pk": 16,
     "fields": {
-      "name": "Can view session",
+      "name": "Can view book",
       "content_type": 4,
-      "codename": "view_session"
+      "codename": "view_book"
     }
   },
   {
     "model": "auth.permission",
     "pk": 17,
     "fields": {
-      "name": "Can add borrowing",
+      "name": "Can add session",
       "content_type": 5,
-      "codename": "add_borrowing"
+      "codename": "add_session"
     }
   },
   {
     "model": "auth.permission",
     "pk": 18,
     "fields": {
-      "name": "Can change borrowing",
+      "name": "Can change session",
       "content_type": 5,
-      "codename": "change_borrowing"
+      "codename": "change_session"
     }
   },
   {
     "model": "auth.permission",
     "pk": 19,
     "fields": {
-      "name": "Can delete borrowing",
+      "name": "Can delete session",
       "content_type": 5,
-      "codename": "delete_borrowing"
+      "codename": "delete_session"
     }
   },
   {
     "model": "auth.permission",
     "pk": 20,
     "fields": {
-      "name": "Can view borrowing",
+      "name": "Can view session",
       "content_type": 5,
-      "codename": "view_borrowing"
+      "codename": "view_session"
     }
   },
   {
     "model": "auth.permission",
     "pk": 21,
     "fields": {
-      "name": "Can add book",
+      "name": "Can add reading group",
       "content_type": 6,
-      "codename": "add_book"
+      "codename": "add_readinggroup"
     }
   },
   {
     "model": "auth.permission",
     "pk": 22,
     "fields": {
-      "name": "Can change book",
+      "name": "Can change reading group",
       "content_type": 6,
-      "codename": "change_book"
+      "codename": "change_readinggroup"
     }
   },
   {
     "model": "auth.permission",
     "pk": 23,
     "fields": {
-      "name": "Can delete book",
+      "name": "Can delete reading group",
       "content_type": 6,
-      "codename": "delete_book"
+      "codename": "delete_readinggroup"
     }
   },
   {
     "model": "auth.permission",
     "pk": 24,
     "fields": {
-      "name": "Can view book",
+      "name": "Can view reading group",
       "content_type": 6,
-      "codename": "view_book"
+      "codename": "view_readinggroup"
     }
   },
   {
@@ -501,6 +498,18 @@
     "fields": {
       "name": "bookseller_grp",
       "permissions": [
+        13,
+        14,
+        15,
+        16,
+        9,
+        10,
+        11,
+        12,
+        5,
+        6,
+        7,
+        8,
         21,
         22,
         23,
@@ -508,19 +517,7 @@
         17,
         18,
         19,
-        20,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16
+        20
       ]
     }
   },
@@ -530,12 +527,12 @@
     "fields": {
       "name": "customer_grp",
       "permissions": [
+        16,
+        12,
+        8,
         24,
         20,
-        8,
-        12,
-        16,
-        17
+        9
       ]
     }
   },
@@ -560,7 +557,7 @@
     "pk": 3,
     "fields": {
       "app_label": "library",
-      "model": "readinggroups"
+      "model": "borrowing"
     }
   },
   {
@@ -568,7 +565,7 @@
     "pk": 4,
     "fields": {
       "app_label": "library",
-      "model": "session"
+      "model": "book"
     }
   },
   {
@@ -576,7 +573,7 @@
     "pk": 5,
     "fields": {
       "app_label": "library",
-      "model": "borrowing"
+      "model": "session"
     }
   },
   {
@@ -584,7 +581,7 @@
     "pk": 6,
     "fields": {
       "app_label": "library",
-      "model": "book"
+      "model": "readinggroup"
     }
   },
   {
@@ -636,7 +633,7 @@
     }
   },
   {
-    "model": "library.readinggroups",
+    "model": "library.readinggroup",
     "pk": 1,
     "fields": {
       "name": "Mystery Lovers",
@@ -645,7 +642,7 @@
     }
   },
   {
-    "model": "library.readinggroups",
+    "model": "library.readinggroup",
     "pk": 2,
     "fields": {
       "name": "Book Club",
@@ -964,8 +961,7 @@
     "pk": 1,
     "fields": {
       "name": "Mystery Lovers Session 1",
-      "datetime": "2022-01-01T19:00:00+03:00",
-      "reading_groups": 1
+      "datetime": "2022-01-01T19:00:00+03:00"
     }
   },
   {
@@ -973,8 +969,7 @@
     "pk": 2,
     "fields": {
       "name": "Book Club Session 2",
-      "datetime": "2022-02-01T18:00:00+03:00",
-      "reading_groups": 2
+      "datetime": "2022-02-01T18:00:00+03:00"
     }
   },
   {

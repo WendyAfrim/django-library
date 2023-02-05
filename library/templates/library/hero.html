@@ -8,7 +8,7 @@
             <div class="columns">
                 <div class="column is-5">
                     <p class="title">
-                        Library
+                        Librapp
                     </p>
                     <p class="subtitle medium-top-margin">
                         A simple library database
@@ -26,8 +26,8 @@
                                 <div class="select">
                                     <select name="library">
                                         <option value="">Select library</option>
-                                        {% for library in all_libraries %}
-                                        <option value="{{ library.id }}" {% if library.id == library_id %}selected{% endif %}>{{ library.name }}</option>
+                                        {% for library_ in all_libraries %}
+                                        <option value="{{ library_.id }}" {% if library_.id == library.id %}selected{% endif %}>{{ library_.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>

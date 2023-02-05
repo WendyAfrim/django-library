@@ -1,0 +1,75 @@
+{% load static %}
+
+{% if reading_groups.count == 0 %}
+<div class="column is-full">
+    <div class="notification is-warning">
+        <button class="delete"></button>
+        <strong>Oops!</strong> No reading group found.
+    </div>
+</div>
+{% endif %}
+<div class="columns is-multiline is-centered">
+    {% for reading_group in reading_groups %}
+    {% with per_row=per_row %}
+    {% if per_row == 1 %}
+    <div class="column is-full">
+    {% elif per_row == 2 %}
+    <div class="column is-half">
+    {% elif per_row == 3 %}
+    <div class="column is-one-third">
+    {% elif per_row == 4 %}
+    <div class="column is-one-quarter">
+    {% elif per_row == 5 %}
+    <div class="column is-one-fifth">
+    {% elif per_row == 6 %}
+    <div class="column is-one-sixth">
+    {% else %}
+    <div class="column is-3">
+    {% endif %}
+    {% endwith %}
+        <div class="card">
+            <div class="card-image has-text-centered">
+                <figure class="image is-4by3">
+                    <img src="{% static 'img/placeholder.png' %}" alt="{{ reading_group.name }}">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4 has-text-weight-bold">{{ reading_group.name }}</p>
+                        <p class="subtitle is-6">{{ reading_group.description }}</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p><strong>Capacity:</strong> {{ reading_group.capacity }} members</p>
+                    <p>
+                        <strong>Joined users:</strong>
+                        {% if not reading_group.users.all %}
+                        <span class="has-text-grey">No user joined yet.</span>
+                        {% endif %}
+                        {% for user in reading_group.users.all %}
+                        {% if forloop.last %}
+                        <span class="has-text-grey">{{ user.username }}</span>
+                        {% else %}
+                        <span class="has-text-grey">{{ user.username }},</span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            <footer class="card-footer">
+                {% if single == 1 %}
+                <a href="{% url 'reading_groups' %}" class="card-footer-item">🔙 Back</a>
+                {% else %}
+                <a href="{% url 'reading_group' reading_group.id %}" class="card-footer-item">View</a>
+                {% endif %}
+                {% if user in reading_group.users.all %}
+                <a href="{% url 'reading_group_leave' reading_group.id %}" class="card-footer-item">Leave</a>
+                {% else %}
+                <a href="{% url 'reading_group_join' reading_group.id %}" class="card-footer-item">Join</a>
+                {% endif %}
+            </footer>
+        </div>
+    </div>
+    {% endfor %}
+</div>

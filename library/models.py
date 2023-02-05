@@ -3,16 +3,17 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import Group
 
 # Create your models here.
-class ReadingGroups(models.Model):
+class ReadingGroup(models.Model):
     name          = models.fields.CharField(max_length=100)
     capacity      = models.IntegerField()
     description   = models.TextField()
+    users        = models.ManyToManyField('User', related_name='reading_groups', blank=True)
+    sessions      = models.ManyToManyField('Session', related_name='reading_groups', blank=True)
 
     def __str__(self):
         return self.name
 
 class User(AbstractUser):
-    reading_groups  = models.ForeignKey(ReadingGroups, on_delete=models.CASCADE, null=True, blank=True)
 
     def is_bookseller(self):
         return self.groups.filter(name='bookseller_grp').exists()
@@ -48,8 +49,7 @@ class Book(models.Model):
 
 class Session(models.Model):
     name           = models.fields.CharField(max_length=100)
-    datetime       = models.DateTimeField() 
-    reading_groups = models.ForeignKey(ReadingGroups, on_delete=models.CASCADE)
+    datetime       = models.DateTimeField()
 
     def __str__(self):
         return self.name

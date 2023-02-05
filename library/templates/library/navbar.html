@@ -18,8 +18,14 @@
         Dashboard
       </a>
       {% endif %}
-      <a class="navbar-item" href="{% url 'books' %}" disabled>
+      <a class="navbar-item" href="{% url 'books' %}">
         Books
+      </a>
+      <a class="navbar-item" href="{% url 'libraries' %}">
+        Libraries
+      </a>
+      <a class="navbar-item" href="{% url 'reading_groups' %}">
+        Reading groups
       </a>
     </div>
     <div class="navbar-end">

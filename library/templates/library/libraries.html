@@ -59,7 +59,17 @@ Libraries | Librapp
                             });
                             marker.addListener("click", () => {
                                 infoWindow.close()
-                                infoWindow.setContent("<div class='has-text-centered'><h1 class='title'>{{ library.name }}</h1><p>{{ library.department }}</p><p>{{ library.address }}</p></div>");
+                                infoWindow.setContent(`
+                                    <div class='has-text-centered'>
+                                        <h1 class='title mb-2'>{{ library.name }}</h1>
+                                        <p class='my-2'>
+                                            {{ library.department }}
+                                            <br>
+                                            {{ library.address }}
+                                        </p>
+                                        <a href="{% url 'library' library.id %}" class='button is-info'>Explore library</a>
+                                    </div>`
+                                );
                                 infoWindow.open(map, marker);
                             });
                         }

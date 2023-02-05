@@ -2,16 +2,17 @@ from django.test import TestCase
 from django.db import models
 
 # Create your tests here.
-class ReadingGroups(models.Model):
+class ReadingGroup(models.Model):
     name          = models.fields.CharField(max_length=100)
     capacity      = models.IntegerField()
     description   = models.TextField()
+    users        = models.ManyToManyField('User', related_name='reading_groups', blank=True)
+    sessions      = models.ManyToManyField('Session', related_name='reading_groups', blank=True)
 
 class User(models.Model):
     firstname       = models.fields.CharField(max_length=100)
     lastname        = models.fields.CharField(max_length=100)
     roles           = models.fields.CharField(max_length=100)
-    reading_groups  = models.ForeignKey(ReadingGroups, on_delete=models.CASCADE)
 
 class Library(models.Model):
     name          = models.fields.CharField(max_length=100)
@@ -36,4 +37,3 @@ class Book(models.Model):
 class Session(models.Model):
     name           = models.fields.CharField(max_length=100)
     time           = models.IntegerField()
-    reading_groups = models.ForeignKey(ReadingGroups, on_delete=models.CASCADE)

@@ -1,0 +1,23 @@
+{% extends 'library/base.html' %}
+{% load static %}
+
+{% block title %}
+
+{{ reading_group.name }} - Reading group | Librapp
+{% endblock %}
+
+{% block head %}
+<meta name="description" content='Librapp | An app to manage your library'>
+{% endblock %}
+
+{% block body %}
+
+{% include 'library/hero.html' %}
+
+<section class="section">
+    <div class="container">
+        {% include 'library/_reading_group_loop.html' with reading_groups=reading_groups per_row=3 %}
+    </div>
+</section>
+
+{% endblock %}

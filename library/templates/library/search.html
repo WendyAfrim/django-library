@@ -24,7 +24,7 @@ Searched for "{{ query }}" - Books | Librapp
                 {% endif %}
             </div>
             <div class="field">
-                <h1 class="title">Searched for "{{ query }}"</h1>
+                <h1 class="title">Searched for "{{ query }}" in {% if library %}{{ library.name }}{% else %}all libraries{% endif %}</h1>
                 <h2 class="subtitle">Found {{ books.count }} books</h2>
             </div>
         </div>

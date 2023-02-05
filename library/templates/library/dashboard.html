@@ -22,6 +22,9 @@ Dashboard | Librapp
             <div class="buttons is-pulled-right">
                 <a class="button is-primary" href="{% url 'book_add' %}">Add new book</a>
             </div>
+            <div class="buttons is-pulled-right mr-2">
+                <a class="button is-primary" href="{% url 'reading_group_add' %}">Add new reading group</a>
+            </div>
             {% endif %}
         </div>
         <div class="field">
@@ -46,10 +49,18 @@ Dashboard | Librapp
     </div>
     <div class="container my-3">
         <div class="field">
-            <h3 class="title is-4">Due books</h3>
-            <h4 class="subtitle is-6">All due books</h4>
+            <h3 class="title is-4">Overdue books</h3>
+            <h4 class="subtitle is-6">All overdue books</h4>
         </div>
         {% render_table dued_books_user_table %}
+    </div>
+    <div class="container my-3">
+        <div class="field">
+            <h3 class="title is-4">Reading groups</h3>
+            <h4 class="subtitle is-6">All reading groups</h4>
+        </div>
+        {% render_table reading_group_table %}
+    </div>
 </section>
 
 {% endblock %}
